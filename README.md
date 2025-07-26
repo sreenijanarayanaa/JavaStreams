@@ -1,8 +1,10 @@
-# 📚 Java Streams Guide
+# 📚 Java Streams
 
 ## 🧵 What Is a Stream?
 
-A **Stream** in Java is a sequence of elements supporting functional-style operations. It operates on a source (like arrays or collections) and enables efficient, readable data processing pipelines.
+A **Stream** in Java is used to proccess collection objects.
+A stream is a sequence of elements that supports variours methods which can be pipelined to produce desired output.
+It operates on a source (like arrays or collections) and enables efficient, readable data processing pipelines.
 
 ### 🔍 Key Characteristics:
 - Streams do **not** store data
