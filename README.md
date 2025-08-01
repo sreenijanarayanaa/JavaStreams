@@ -346,6 +346,10 @@ public class ForEachExample {
 3. `reduce`
 
 The `reduce` method combines elements of the stream into a single value using an associative accumulation function.
+`Syntax:`
+``T reduce(T identity, BinaryOperator<T> accumulator);``
+- identity: An initial value of type T.
+- accumulator: A function that combines two values of type T.
 ```java
 import java.util.Arrays;
 import java.util.List;
@@ -370,11 +374,48 @@ import java.util.List;
 
 public class ToArrayExample {
     public static void main(String[] args) {
+
         List<String> words = Arrays.asList("apple", "banana", "cherry");
 
         String[] array = words.stream()
                               .toArray(String[]::new);
         System.out.println(Arrays.toString(array)); // Output: [apple, banana, cherry]
+
+//******************************************************************************//
+
+        List<String> words2 = Arrays.asList("a","ab","abc");
+
+        // Using reduce to find the longest string in the list
+        Optional<String> longestString = words2.stream()
+            .reduce((word1, word2) -> word1.length() > word2.length() ? word1 : word2);
+
+        // Displaying the longest String
+        longestString.ifPresent(System.out::println); //abc
+
+//******************************************************************************//
+        String[] array = { "Hello","to","my", "World"};
+
+        // Using reduce to concatenate strings with a hyphen
+        Optional<String> combinedString = Arrays.stream(array)
+            .reduce((str1, str2) -> str1 + "-" + str2);
+        combinedString.ifPresent(System.out::println); //Hello-to-my-world
+
+//******************************************************************************//
+        List<Integer> numbers = Arrays.asList(-2, 0, 4, 6, 8);
+
+        // Using reduce to find the sum of all elements
+        int sum = numbers.stream()
+            .reduce(0, (element1, element2) -> element1 + element2);
+        System.out.println("The sum of all elements is " + sum); //The sum of all elements is 16
+
+
+//******************************************************************************//
+ // Calculating the product of all numbers in the range [2, 8)
+        int product = IntStream.range(2, 8)
+            .reduce((num1, num2) -> num1 * num2)
+            .orElse(-1); // Provides -1 if the stream is empty
+        System.out.println("The product is : " + product); //The product is : 5040
+
     }
 }
 ```
